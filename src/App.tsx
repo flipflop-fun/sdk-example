@@ -84,16 +84,16 @@ function WalletContent() {
           {(errorMessage || successMessage) && (
             <div className="mt-6 space-y-4">
               {errorMessage && (
-                <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 break-words whitespace-pre-wrap">
+                <div className="p-4 bg-red-50 text-sm border border-red-200 rounded-lg text-red-700 break-words whitespace-pre-wrap">
                   {errorMessage}
                 </div>
               )}
               {successMessage?.tx && (
-                <div className="p-4 bg-green-50 border border-green-200 rounded-lg text-green-700 break-words whitespace-pre-wrap">
+                <div className="p-4 bg-green-50 text-sm border border-green-200 rounded-lg text-green-700 break-words whitespace-pre-wrap">
                   <div className="font-bold">Transaction Success, tx: </div>
-                  <div>{successMessage.tx}</div>
-                  <div className="mt-5 font-bold">Flipflop details: </div>
-                  <a href={successMessage.tokenUrl} target="_blank">{successMessage.tokenUrl}</a>
+                  <a href={`https://explorer.solana.com/tx/${successMessage.tx}?cluster=devnet`} target="_blank">{successMessage.tx}</a>
+                  {/* <div className="mt-5 font-bold">Flipflop details: </div> */}
+                  {/* <a href={successMessage.tokenUrl} target="_blank">{successMessage.tokenUrl}</a> */}
                 </div>
               )}
             </div>

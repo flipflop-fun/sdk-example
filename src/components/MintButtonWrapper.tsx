@@ -22,32 +22,49 @@ export const MintButtonWrapper:FC<MintButtonWrapperProps> = ({
   const anchorWallet = useAnchorWallet();
 
   return (
-    <MintButton
-      mintAddress={mintAddress}
-      urcCode={urcCode}
-      wallet={anchorWallet}
-      connection={connection}
-      onStart={onStart}
-      onError={onError}
-      onSuccess={onSuccess}
-      buttonTitle="小费或任何你想要的名字"
-      buttonStyle={{
-        width: '100%',
-        backgroundColor: 'green',
-        color: 'white',
-        border: '1px solid white',
-        borderRadius: '5px',
-        padding: '10px',
-        margin: 'auto',
-        cursor: 'pointer',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        textAlign: 'center',
-        fontSize: '16px',
-        fontWeight: 'bold',
-        letterSpacing: '1px',
-      }}
-    />
+    <div>
+      <MintButton
+        mintAddress={mintAddress}
+        urcCode={urcCode}
+        wallet={anchorWallet}
+        connection={connection}
+        onStart={onStart}
+        onError={onError}
+        onSuccess={onSuccess}
+        buttonTitle="Donate"
+        buttonStyle={{
+          width: '100%',
+          backgroundColor: 'green',
+          color: 'white',
+          border: '1px solid white',
+          borderRadius: '5px',
+          padding: '10px',
+          margin: 'auto',
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          textAlign: 'center',
+          fontSize: '16px',
+          fontWeight: 'bold',
+          letterSpacing: '1px',
+        }}
+        informationStyle={{
+          display: 'flex',
+          justifyContent: 'left',
+          color: 'gray',
+          fontSize: '14px',
+          textAlign: 'left',
+          margin: '10px auto'
+        }}
+        generateURCStyle={{
+          display: 'flex',
+          justifyContent: 'center',
+          color: 'gray',
+          margin: '10px auto'
+        }}
+      />
+
+    </div>
   );
 }
