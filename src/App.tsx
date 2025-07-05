@@ -16,8 +16,8 @@ function WalletContent() {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [successMessage, setSuccessMessage] = useState<SuccessResponseData>();
   const [loading, setLoading] = useState<boolean>(false);
-  const [mintAddress, setMintAddress] = useState<string>('357Hn86d3ZPdWwfKfCcz21T2CWefYBux1aMoXwyjsN8j');
-  const [urcCode, setUrcCode] = useState<string>('tcnf60_5UtbDq2joPY9tgNi');
+  const [mintAddress, setMintAddress] = useState<string>('HkLWezaZCZpSyTMQRbGTGnCtMXBQmkegtqkt1swFEQ6Q'); // HkLWezaZCZpSyTMQRbGTGnCtMXBQmkegtqkt1swFEQ6Q
+  const [urcCode, setUrcCode] = useState<string>('998_5UtbDq2joPY9tgNi');
   const { publicKey } = useWallet();
 
   const handleError = (msg: string) => {
@@ -64,6 +64,7 @@ function WalletContent() {
           </div>
 
           <MintButtonWrapper
+            network='devnet'
             mintAddress={mintAddress}
             urcCode={urcCode}
             onStart={() => {
