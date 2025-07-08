@@ -1,7 +1,5 @@
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { ConnectionProvider, useWallet, WalletProvider } from '@solana/wallet-adapter-react';
-import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
-import { clusterApiUrl } from '@solana/web3.js';
 import {
   PhantomWalletAdapter,
   SolflareWalletAdapter,
@@ -11,13 +9,15 @@ import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import '@solana/wallet-adapter-react-ui/styles.css';
 import { MintButtonWrapper } from './components/MintButtonWrapper';
 import type { SuccessResponseData } from '@flipflop-sdk/tools/dist/types/common';
+import { MINT_ADDRESS, NETWORK, URC } from './config';
+import { clusterApiUrl } from '@solana/web3.js';
 
-function WalletContent() {
+function WalletContent({endpoint}: {endpoint: string}) {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [successMessage, setSuccessMessage] = useState<SuccessResponseData>();
   const [loading, setLoading] = useState<boolean>(false);
-  const [mintAddress, setMintAddress] = useState<string>('HkLWezaZCZpSyTMQRbGTGnCtMXBQmkegtqkt1swFEQ6Q'); // HkLWezaZCZpSyTMQRbGTGnCtMXBQmkegtqkt1swFEQ6Q
-  const [urcCode, setUrcCode] = useState<string>('998_5UtbDq2joPY9tgNi');
+  const [mintAddress, setMintAddress] = useState<string>(MINT_ADDRESS);
+  const [urcCode, setUrcCode] = useState<string>(URC);
   const { publicKey } = useWallet();
 
   const handleError = (msg: string) => {
@@ -64,7 +64,8 @@ function WalletContent() {
           </div>
 
           <MintButtonWrapper
-            network='devnet'
+            network={NETWORK}
+            rpc={endpoint}
             mintAddress={mintAddress}
             urcCode={urcCode}
             onStart={() => {
@@ -92,7 +93,7 @@ function WalletContent() {
               {successMessage?.tx && (
                 <div className="p-4 bg-green-50 text-sm border border-green-200 rounded-lg text-green-700 break-words whitespace-pre-wrap">
                   <div className="font-bold">Transaction Success, tx: </div>
-                  <a href={`https://explorer.solana.com/tx/${successMessage.tx}?cluster=devnet`} target="_blank">{successMessage.tx}</a>
+                  <a href={`https://explorer.solana.com/tx/${successMessage.tx}?cluster=${NETWORK}`} target="_blank">{successMessage.tx}</a>
                   {/* <div className="mt-5 font-bold">Flipflop details: </div> */}
                   {/* <a href={successMessage.tokenUrl} target="_blank">{successMessage.tokenUrl}</a> */}
                 </div>
@@ -106,9 +107,7 @@ function WalletContent() {
 }
 
 function App() {
-  const network = WalletAdapterNetwork.Devnet;
-  const endpoint = useMemo(() => clusterApiUrl(network), [network]);
-
+  const endpoint = NETWORK === 'devnet' ? import.meta.env.VITE_DEVNET_RPC : import.meta.env.VITE_MAINNET_RPC;
   const wallets = useMemo(
     () => [
       new PhantomWalletAdapter(),
@@ -118,10 +117,10 @@ function App() {
   );
 
   return (
-    <ConnectionProvider endpoint={endpoint}>
+    <ConnectionProvider endpoint={endpoint || clusterApiUrl('devnet')}>
       <WalletProvider wallets={wallets} autoConnect>
         <WalletModalProvider>
-          <WalletContent />
+          <WalletContent endpoint={endpoint} />
         </WalletModalProvider>
       </WalletProvider>
     </ConnectionProvider>

@@ -5,6 +5,7 @@ import type { FC } from "react";
 
 type MintButtonWrapperProps = {
   network: string;
+  rpc: string;
   mintAddress: string;
   urcCode: string;
   onStart?: () => void;
@@ -14,6 +15,7 @@ type MintButtonWrapperProps = {
 
 export const MintButtonWrapper:FC<MintButtonWrapperProps> = ({
   network,
+  rpc,
   mintAddress,
   urcCode,
   onStart,
@@ -27,6 +29,7 @@ export const MintButtonWrapper:FC<MintButtonWrapperProps> = ({
     <div>
       <MintButton
         network={network}
+        rpc={rpc}
         mintAddress={mintAddress}
         urcCode={urcCode}
         wallet={anchorWallet}
