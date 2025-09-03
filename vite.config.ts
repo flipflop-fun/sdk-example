@@ -43,6 +43,8 @@ export default defineConfig({
     }
   },
   server: {
+    port: 3000,
+    strictPort: true,
     watch: {
       ignored: ['!**/node_modules/@flipflop-sdk/tools/**']
     },

@@ -3,5 +3,5 @@
 // export const URC = 'AP_DJ3jvpv6CLjSqxaD';
 
 export const NETWORK: 'mainnet' | 'devnet' = 'devnet';
-export const MINT_ADDRESS = 'BGhPPMtwujy2bdZCCVEQXt5HubsV9XiACbTLV7HzFN7P';
-export const URC = 'HW_5UtbDq2joPY9tgNi';
+export const MINT_ADDRESS = '12P3bEJ16dp39RDUpz3nKs8u3rUwXDBhEDrCN7YTQ8yV';
+export const URC = 'ciaotool11_7Db1TTh42DxWddep';

@@ -11,6 +11,7 @@ import { MintButtonWrapper } from './components/MintButtonWrapper';
 import type { SuccessResponseData } from '@flipflop-sdk/tools/dist/types/common';
 import { MINT_ADDRESS, NETWORK, URC } from './config';
 import { clusterApiUrl } from '@solana/web3.js';
+import { LaunchButtonWrapper } from './components/LaunchButtonWrapper';
 
 function WalletContent({endpoint}: {endpoint: string}) {
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -77,6 +78,20 @@ function WalletContent({endpoint}: {endpoint: string}) {
             onSuccess={handleSuccess}
           />
 
+          <div className="mt-10 border-t pt-8">
+            <h3 className="text-lg font-semibold mb-4">Launch Token</h3>
+            <LaunchButtonWrapper
+              network={NETWORK}
+              buttonTitle="Launch Token"
+              onStart={() => {
+                setLoading(true);
+                setErrorMessage('');
+                setSuccessMessage(undefined);
+              }}
+              onError={handleError}
+              onSuccess={(data: any) => handleSuccess(data as SuccessResponseData)}
+            />
+          </div>
           {loading && (
             <div className="mt-6">
               <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-gray-900"></div>
